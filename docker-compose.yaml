@@ -1,0 +1,22 @@
+version: "3.4"
+services:
+  os:
+    build:
+      dockerfile: ./Dockerfile
+      context: ./
+    tty: true
+    volumes:
+      - srvroot:/var/www
+      - apacheconf:/etc/apache2
+      - phpconf:/usr/local/etc/php
+      - type: bind
+        source: ./authorized_keys
+        target: /root/.ssh/authorized_keys
+        content: |
+          # Authorized keys
+    ports:
+      - "${PUBLIC_SSH_PORT}:2022"
+    environment:
+      - container=podman
+      - SSH_PUBLIC_PORT=${PUBLIC_SSH_PORT:-3300}
+
