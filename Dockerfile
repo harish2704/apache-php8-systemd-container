@@ -27,6 +27,13 @@ RUN apt-get install -y --no-install-recommends procps iproute2 vim openssh-serve
 RUN cp "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"; \
     sed -i 's/#Port 22/Port 2022/' /etc/ssh/sshd_config
 
+RUN mkdir -p /etc/systemd/system/sshd.service.d; \
+    cat <<EOF > /etc/systemd/system/sshd.service.d/override.conf
+[Unit]
+Wants=systemd-user-sessions.service
+After=systemd-user-sessions.service
+EOF
+
 EXPOSE 80/tcp
 EXPOSE 2022/tcp
 
