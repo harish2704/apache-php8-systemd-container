@@ -12,8 +12,7 @@ services:
       - type: bind
         source: ./authorized_keys
         target: /root/.ssh/authorized_keys
-        content: |
-          # Authorized keys
+
     ports:
       - "${PUBLIC_SSH_PORT}:2022"
     environment:
