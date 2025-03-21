@@ -28,6 +28,7 @@ RUN cp "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"; \
     sed -i 's/#Port 22/Port 2022/' /etc/ssh/sshd_config
 
 RUN mkdir -p /etc/systemd/system/sshd.service.d; \
+    systemctl mask systemd-journald.service systemd-journald.socket; \
     cat <<EOF > /etc/systemd/system/sshd.service.d/override.conf
 [Unit]
 Wants=systemd-user-sessions.service
