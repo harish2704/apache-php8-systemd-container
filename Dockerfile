@@ -30,9 +30,9 @@ RUN cp "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"; \
 RUN mkdir -p /etc/systemd/system/sshd.service.d; \
     systemctl mask systemd-journald.service systemd-journald.socket; \
     cat <<EOF > /etc/systemd/system/sshd.service.d/override.conf
-[Unit]
-Wants=systemd-user-sessions.service
-After=systemd-user-sessions.service
+    [Unit]
+    Wants=systemd-user-sessions.service
+    After=systemd-user-sessions.service
 EOF
 
 EXPOSE 80/tcp
