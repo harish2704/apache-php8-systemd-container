@@ -20,3 +20,7 @@ services:
       - container=podman
       - SSH_PUBLIC_PORT=${PUBLIC_SSH_PORT:-3300}
 
+volumes:
+  srvroot:
+  apacheconf:
+  phpconf:
